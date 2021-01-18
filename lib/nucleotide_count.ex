@@ -22,6 +22,7 @@ defmodule NucleotideCount do
       end
     end)
   end
+
   @doc """
   Returns a summary of counts by nucleotide.
 
@@ -33,7 +34,34 @@ defmodule NucleotideCount do
   @spec histogram([char]) :: map
   def histogram(strand) do
     map = %{?A => 0, ?T => 0, ?C => 0, ?G => 0}
+    # IO.puts strand
 
 
+
+
+    # tuples = Enum.frequencies(strand)
+    new_map = Enum.frequencies(strand)
+      |> Map.to_list()
+      |> Map.new()
+
+    map = Enum.reduce(new_map, map, fn({k, v}, map) ->
+      map = %{map | k => v}
+      IO.inspect(map, label: "Here")
+    end)
+    IO.inspect(map, label: "And here:")
   end
+
+    # IO.inspect tuples
+    # IO.inspect new_map
+
+  #   map = for n <- new_map do
+  #     {k, v} = n
+  #     IO.puts "#{k}: #{v}"
+
+  #     map = %{map | k => v}
+  #     IO.puts("Here: #{inspect map}")
+  #     map
+  #   end
+  #   IO.puts "I'm map: #{inspect(map)}"
+  # end
 end

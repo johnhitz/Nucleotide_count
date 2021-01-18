@@ -40,13 +40,12 @@ defmodule NucleotideCount do
       Map.update!(map, x, fn n -> n + 1 end)
     end)
 
+    # This solution would be quadratic if I use strand instead of the sigil ~c[CGTA]
+    # As it is it is linear.
     # _map = Enum.reduce(~c[CGTA], map, fn(x, map) ->
     #   count = Enum.count(strand, fn(i) -> i == x end)
     #   _map = %{map | x => count}
     # end)
-
-
-
 
     # tuples = Enum.frequencies(strand)
     # new_map = Enum.frequencies(strand)

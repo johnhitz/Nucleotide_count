@@ -36,32 +36,26 @@ defmodule NucleotideCount do
     map = %{?A => 0, ?T => 0, ?C => 0, ?G => 0}
     # IO.puts strand
 
+    _map = Enum.reduce(strand, map, fn x, map ->
+      Map.update!(map, x, fn n -> n + 1 end)
+    end)
+
+    # _map = Enum.reduce(~c[CGTA], map, fn(x, map) ->
+    #   count = Enum.count(strand, fn(i) -> i == x end)
+    #   _map = %{map | x => count}
+    # end)
+
 
 
 
     # tuples = Enum.frequencies(strand)
-    new_map = Enum.frequencies(strand)
-      |> Map.to_list()
-      |> Map.new()
+    # new_map = Enum.frequencies(strand)
+    #   |> Map.to_list()
+    #   |> Map.new()
 
-    map = Enum.reduce(new_map, map, fn({k, v}, map) ->
-      map = %{map | k => v}
-      IO.inspect(map, label: "Here")
-    end)
-    IO.inspect(map, label: "And here:")
+    # _map = Enum.reduce(new_map, map, fn({k, v}, map) ->
+    #   map = %{map | k => v}
+    #   IO.inspect(map, label: "Here")
+    # end)
   end
-
-    # IO.inspect tuples
-    # IO.inspect new_map
-
-  #   map = for n <- new_map do
-  #     {k, v} = n
-  #     IO.puts "#{k}: #{v}"
-
-  #     map = %{map | k => v}
-  #     IO.puts("Here: #{inspect map}")
-  #     map
-  #   end
-  #   IO.puts "I'm map: #{inspect(map)}"
-  # end
 end
